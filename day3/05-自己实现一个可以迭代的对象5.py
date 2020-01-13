@@ -3,25 +3,25 @@ from collections import Iterable,Iterator
 class Classmate(object):
 	def __init__(self):
 		self.names = list()
+		self.current_num = 0
 	
 	def add(self,name):
 		self.names.append(name)
 	
 	def __iter__(self):
 		"""如果想要一个对象成为一个可以迭代的对象，即可以使用for，那么必须实现__iter__方法"""
-		return ClassIterator(self)
-class ClassIterator(object):
-	def __init__(self,obj):
-		self.obj=obj
-	def __iter__(self):
-		pass
-	
+		return self
+
+
 	def __next__(self):
 		#for i in random.randint(0,2):
-		i=random.randint(0,2)
-		return self.obj.names[i]
-	#	return ran_name
-
+		if self.current_num<len(self.names):
+			ret = self.names[self.current_num]
+			self.current_num += 1
+			return ret
+		#	return ran_name
+		else:
+			raise StopIteration
 classmate = Classmate()
 
 classmate.add("老王")

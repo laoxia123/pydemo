@@ -13,15 +13,19 @@ class Classmate(object):
 class ClassIterator(object):
 	def __init__(self,obj):
 		self.obj=obj
+		self.current_num = 0
 	def __iter__(self):
 		pass
 	
 	def __next__(self):
 		#for i in random.randint(0,2):
-		i=random.randint(0,2)
-		return self.obj.names[i]
-	#	return ran_name
-
+		if self.current_num<len(self.obj.names):
+			ret = self.obj.names[self.current_num]
+			self.current_num += 1
+			return ret
+		#	return ran_name
+		else:
+			raise StopIteration
 classmate = Classmate()
 
 classmate.add("老王")
